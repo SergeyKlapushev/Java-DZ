@@ -7,13 +7,13 @@ import Scanner;
 public class Task1 {
     public static void main(String[] args) {
         
-        Scanner iScanner = new Scanner(System.in);
+        Scanner number = new Scanner(System.in);
         System.out.printf("Введите первое число: ");
-        Integer num = iScanner.nextInt();
+        Integer num = number.nextInt();
         System.out.println(num);
         int triangleNum = findTriagleNum(num);
         System.out.println("Треугольное число: " + triangleNum);
-        iScanner.close();
+        number.close();
     }
 
     public static int findTriagleNum(int num) {
