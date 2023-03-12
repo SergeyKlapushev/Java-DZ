@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.NoSuchElementException;
 
 public class Task3 {
     public static void main(String[] args) {
