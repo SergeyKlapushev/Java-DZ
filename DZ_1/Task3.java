@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
+
 public class Task3 {
     public static void main(String[] args) {
         StringBuilder sb = new StringBuilder();
         Scanner scan = new Scanner(System.in);
         
-
         Writer("Введите первое число: ");
         int num1 = imputNumber(scan);
         sb.append(num1);
@@ -27,7 +27,6 @@ public class Task3 {
         scan.close();
 
         Writer(sb.toString());
-
     }
 
     public static String Writer(String str)
