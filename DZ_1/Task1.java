@@ -1,8 +1,5 @@
-package DZ_1;
-
 import java.util.Scanner;
 
-import Scanner;
 /* Вычислить [n-ое треугольного число](сумма чисел от 1 до n), n! (произведение чисел от 1 до n) */
 public class Task1 {
     public static void main(String[] args) {
