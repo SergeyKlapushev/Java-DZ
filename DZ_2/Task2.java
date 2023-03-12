@@ -8,7 +8,7 @@ import java.util.logging.SimpleFormatter;
 public class Task2 {
     /* Реализуйте алгоритм сортировки пузырьком числового массива, результат после каждой итерации запишите в лог-файл. */
 
-    public static int[] randomArr() {
+    public static int[] randomArray() {
         Random rand = new Random();
         int arr[] = new int[10];
         for (int i = 0; i < arr.length; i++) {
@@ -19,7 +19,7 @@ public class Task2 {
         return arr;
     }
 
-    public static int[] babblSort(int arr[]) throws IOException {
+    public static int[] babbleSort(int arr[]) throws IOException {
         Logger loger = Logger.getLogger(Task2.class.getName());
         FileHandler fHandler = new FileHandler("BabbleInfo.txt");
         SimpleFormatter sFormatter = new SimpleFormatter();
@@ -42,7 +42,7 @@ public class Task2 {
 
     }
 
-    public static void print(int[] arr) {
+    public static void show(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + " ");
         }
@@ -50,6 +50,6 @@ public class Task2 {
 
     public static void main(String[] args) throws IOException {
 
-        print(babblSort(randomArr()));
+        show(babbleSort(randomArray()));
     }
 }
