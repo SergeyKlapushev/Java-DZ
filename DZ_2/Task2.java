@@ -1,55 +1,55 @@
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
+import java.io.PrintStream;
 import java.util.Random;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 public class Task2 {
     /* Реализуйте алгоритм сортировки пузырьком числового массива, результат после каждой итерации запишите в лог-файл. */
 
-    public static int[] randomArray() {
-        Random rand = new Random();
-        int arr[] = new int[10];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = rand.nextInt(100);
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println("");
-        return arr;
-    }
-
-    public static int[] babbleSort(int arr[]) throws IOException {
-        Logger loger = Logger.getLogger(Task2.class.getName());
-        FileHandler fHandler = new FileHandler("BabbleInfo.txt");
-        SimpleFormatter sFormatter = new SimpleFormatter();
-        fHandler.setFormatter(sFormatter);
-        loger.addHandler(fHandler);
-
-        int temp;
-        for (int i = arr.length - 1; i >= 0; i--) {
-            for (int j = 0; j < arr.length - 1; j++) {
-                if (arr[j] < arr[j + 1]) {
-                    temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                }
-            }
-
-            loger.info(Arrays.toString(arr));
-        }
-        return arr;
-
-    }
-
-    public static void show(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-    }
-
     public static void main(String[] args) throws IOException {
 
-        show(babbleSort(randomArray()));
+        PrintStream printStream = new PrintStream("log_file.txt");
+
+        int[] bubbels = new int[7];
+
+        bubbels = fillBubbleArray(bubbels);        
+        String end = sortedArrayBubbels(bubbels, printStream);
+        
+        printStream.print(end);
+    }  
+
+    public static int[] fillBubbleArray(int[] bub){
+        Random rnd = new Random();
+
+        for (int i = 0; i < bub.length; i++) {
+            bub[i] = rnd.nextInt(1, 10);            
+        }
+        return bub;
+    } 
+
+    public static String sortedArrayBubbels(int[] bub, PrintStream ps) throws FileNotFoundException{
+
+        for (int i = 0; i < bub.length; i++) {
+            for (int j = 0; j < bub.length; j++) {
+                if (bub[i] < bub[j]) {
+                    int temp = bub[i];
+                    bub[i] = bub[j];
+                    bub[j] = temp;
+                    writeInFile(bub, ps);
+                }
+            }
+        }
+        return "Sorted complited";
+    }
+
+    public static void writeInFile(int[] bub, PrintStream printStream) throws FileNotFoundException{
+
+  
+        for (int i = 0; i < bub.length; i++) {
+            printStream.print(bub[i]);
+        }
+        printStream.print("\n");
     }
 }

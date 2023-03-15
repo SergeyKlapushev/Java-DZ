@@ -1,59 +1,42 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.Scanner;
 
-/*В файле содержится строка с исходными данными в такой форме:
-    {"name":"Ivanov", "country":"Russia", "city":"Moscow", "age":"null"}
-
- Требуется на её основе построить и вывести на экран новую строку, в форме SQL запроса:
- SELECT * FROM students WHERE name = "Ivanov" AND country = "Russia" AND city = "Moscow"; */
+/*
+Дана строка sql-запроса "select * from students where ". Сформируйте часть WHERE этого запроса, используя StringBuilder.
+Данные для фильтрации приведены ниже в виде json строки.
+Если значение null, то параметр не должен попадать в запрос.
+Параметры для фильтрации: {"name":"Ivanov", "country":"Russia", "city":"Moscow", "age":"null"} 
+*/
 
 public class Task1 {
   public static void main(String[] args) {  
-
-      StringBuilder sb = new StringBuilder();
-      try (BufferedReader reader = Files.newBufferedReader(Paths.get("Data.txt"))) {
-        String line;
-        while ((line = reader.readLine()) != null) {
-          sb.append(line).append(System.lineSeparator());
+    String[][] params = getRequest();
+    StringBuilder request = new StringBuilder();
+    request.append("SELECT * FROM students WHERE ");
+    String prefix = "";
+    for (int i = 0; i < params.length; i++) {
+        if (!params[i][1].toLowerCase().equals("null") && !params[i][1].equals(null)) {
+            request.append(prefix);
+            prefix = " AND ";
+            request.append(params[i][0] + "='" +params[i][1] + "'");
         }
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-
-      String str = sb.toString();
-
-      String str2 = str.replace("{", "").replace("}", "").replace("\"", "");
-      
-      String[] newStr = str2.split(", ");
-
-    Map<String, String> dictionary = new HashMap<String, String>();
-    for (String item : newStr) {
-      String[] strnew = item.split(":");
-      System.out.println(Arrays.toString(strnew));
-      for (int i = 0; i < newStr.length; i++) {
-        dictionary.put(strnew[0], strnew[1]);
-
-      }
     }
-    System.out.println(dictionary.entrySet());
-    StringBuilder WHERE = new StringBuilder();
-    Set<Map.Entry<String, String>> pair = dictionary.entrySet();
-    List<Map.Entry<String, String>> list = new ArrayList<>(pair);
-    for (int i = 0; i < list.size(); i++) {
-      if (!list.get(i).getValue().equals("null")) {
-        WHERE.append(list.get(i).getKey() + " = " + list.get(i).getValue() + " and ");
-        
-      }
-    }
-    System.out.println(WHERE);
-
-  }
+    System.out.println(request);
 }
+
+public static String[][] getRequest() {
+    Scanner inp = new Scanner(System.in);
+    String inputString = inp.nextLine();
+    inp.close();
+    if (inputString.isEmpty() || inputString.equals(null)) {
+        System.out.println("Ошибка ввода.");
+        System.exit(0);
+    }
+    inputString = inputString.replaceAll("[{}\"]", "").replaceAll(", ", ",");
+    String[] inputPairs = inputString.split(",");
+    String[][] output = new String[inputPairs.length][];
+    for (int i = 0; i < inputPairs.length; i++) {
+        output[i] = inputPairs[i].split(":");
+    }
+    return output;
+  }
+}     
