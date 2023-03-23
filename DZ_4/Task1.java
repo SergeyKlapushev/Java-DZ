@@ -13,8 +13,8 @@ public class Task1 {
         linkList.add(3);
         linkList.add(4);
         linkList.add(5);
-        System.out.println("До - "+ linkList);
-        System.out.println("После - "+ rev(linkList));
+        System.out.println("До - " + linkList);
+        System.out.println("После - " + rev(linkList));
     }
 
     public static LinkedList<Integer> rev (LinkedList<Integer> linkList){
