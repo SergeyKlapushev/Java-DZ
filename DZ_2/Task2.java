@@ -44,8 +44,7 @@ public class Task2 {
     }
 
     public static void writeInFile(int[] bub, PrintStream printStream) throws FileNotFoundException{
-
-  
+        
         for (int i = 0; i < bub.length; i++) {
             printStream.print(bub[i]);
         }
