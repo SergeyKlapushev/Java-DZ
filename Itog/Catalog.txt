@@ -1,0 +1,6 @@
+ASUS Intel 16gb 1000gb Windows
+Linova AMD 4gb 500gb Linux
+Acer AMD 8gb 250gb Linux
+HP Intel 8gb 500gb Windows
+ASUS Intel 16gb 1000gb Linux
+Acer Intel 32gb 500gb Windows
