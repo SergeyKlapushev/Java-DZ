@@ -28,27 +28,27 @@ public class Itog {
         switch (choice) {
             case "1":
                 choiceInt = Integer.parseInt(choice);
-                filteringByFirms(catalog, choiceInt);
+                filtering(catalog, choiceInt);
                 break;
 
             case "2":
                 choiceInt = Integer.parseInt(choice);
-                filteringByFirms(catalog, choiceInt);
+                filtering(catalog, choiceInt);
                 break;
 
             case "3":
                 choiceInt = Integer.parseInt(choice);
-                filteringByFirms(catalog, choiceInt);
+                filtering(catalog, choiceInt);
                 break;
 
             case "4":
                 choiceInt = Integer.parseInt(choice);
-                filteringByFirms(catalog, choiceInt);
+                filtering(catalog, choiceInt);
                 break;
 
             case "5":
                 choiceInt = Integer.parseInt(choice);
-                filteringByFirms(catalog, choiceInt);
+                filtering(catalog, choiceInt);
                 break;
 
             case "*":
@@ -73,11 +73,11 @@ public class Itog {
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public static void filteringByFirms(BufferedReader catalog, Integer choiceInt) throws IOException {
-        showFirms(catalog, choiceInt);
+    public static void filtering(BufferedReader catalog, Integer choiceInt) throws IOException {
+        showCriteria(catalog, choiceInt);
     }
 
-    public static void showFirms(BufferedReader catalog, Integer choiceInt) throws IOException {
+    public static void showCriteria(BufferedReader catalog, Integer choiceInt) throws IOException {
         String line = catalog.readLine();
         String[] firms = line.split(" ");
         Set<String> set = new HashSet<>();
@@ -91,17 +91,46 @@ public class Itog {
         }
 
         catalog = new BufferedReader(new FileReader("Catalog.txt", Charset.forName("UTF-8")));
+        if (choiceInt == 1) {
+            System.out.println("Доступные фирмы производители ноутбуков: " + set.toString());
+        }
+        if (choiceInt == 2) {
+            System.out.println("Доступные фирмы процессоров: " + set.toString());
+        }
+        if (choiceInt == 3) {
+            System.out.println("Доступные объёмы оперативной памяти: " + set.toString());
+        }
+        if (choiceInt == 4) {
+            System.out.println("Доступные объёмы жёстких дисков: " + set.toString());
+        }
+        if (choiceInt == 5) {
+            System.out.println("Доступные операционные системы: " + set.toString());
+        }
 
-        System.out.println("Доступные фирмы производители ноутбуков: " + set.toString());
-        String[] firmsChoice = choiceFirms();
-        resoultOfFortedByFirms(firmsChoice, catalog, choiceInt);
+        String[] firmsChoice = selectСriteria(choiceInt);
+        filteringResult(firmsChoice, catalog, choiceInt);
 
     }
 
-    public static String[] choiceFirms() throws IOException {
+    public static String[] selectСriteria(Integer choiceInt) throws IOException {
 
         Scanner scan = new Scanner(System.in);
-        System.out.print("\nВыберите интресующего вас производителя(ей), через ПРОБЕЛ: ");
+        if (choiceInt == 1) {
+            System.out.print("\nВыберите интресующих вас производителей, через ПРОБЕЛ: ");
+        }
+        if (choiceInt == 2) {
+            System.out.print("\nВыберите интресующие вас процессоры, через ПРОБЕЛ: ");
+        }
+        if (choiceInt == 3) {
+            System.out.print("\nВыберите интресующие вас объёмы оперативной памяти, через ПРОБЕЛ: ");
+        }
+        if (choiceInt == 4) {
+            System.out.print("\nВыберите интресующие вас объёмы жёстких дисков, через ПРОБЕЛ: ");
+        }
+        if (choiceInt == 5) {
+            System.out.print("\nВыберите интресующие вас операционные системы, через ПРОБЕЛ: ");
+        }
+        
         String choice = scan.nextLine();
         choice = choice + " ";
         scan.close();
@@ -111,7 +140,8 @@ public class Itog {
 
     }
 
-    public static void resoultOfFortedByFirms(String[] firmsChoice, BufferedReader catalog, Integer choiceInt) throws IOException {
+    public static void filteringResult(String[] firmsChoice, BufferedReader catalog, Integer choiceInt)
+            throws IOException {
 
         String line = catalog.readLine();
         String[] arr = line.split(" ");
@@ -122,7 +152,7 @@ public class Itog {
             for (int i = 0; i < firmsChoice.length; i++) {
                 arr = line.split(" ");
 
-                if (arr[choiceInt-1].equals(firmsChoice[i])) {
+                if (arr[choiceInt - 1].equals(firmsChoice[i])) {
                     System.out.println(line);
                 }
 
